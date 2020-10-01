@@ -21,7 +21,6 @@
     "title" : "BTS 2020 Last Concert",
     "performer" : "BTS",
     "date" : "2020-10-27T17:13:40+00:00",
-    "place" : "Seoul Chung-ang University",
     "description" : "The last concert of BTS in 2020! Enjoy it!",
     "max_audience" : 3000,
     "price" : 20000
@@ -31,7 +30,6 @@
     "title" : "Twice Comeback Concert",
     "performer" : "Twice",
     "date" : "2020-11-01T09:01:10+00:00",
-    "place" : "Ansan Central Park",
     "description" : "Twice comes back!",
     "max_audience" : 150,
     "price" : 32000
@@ -56,7 +54,6 @@
   "title" : "BTS 2020 Last Concert",
   "performer" : "BTS",
   "date" : "2020-10-27T17:13:40+00:00",
-  "place" : "Seoul Chung-ang University",
   "description" : "The last concert of BTS in 2020! Enjoy it!",
   "max_audience" : 3000,
   "price" : 20000
@@ -73,7 +70,6 @@
 |---|---|---|
 | title | String | title of concert |
 | date | Date | start date of concert |
-| place | String | place of concert |
 | description | String | description of concert |
 | max_audience | Integer | limit of max audience count |
 | price | Integer | price of concert |
@@ -85,7 +81,6 @@
   "title" : "BTS 2020 Last Concert",
   "performer" : "BTS",
   "date" : "2020-10-27T17:13:40+00:00",
-  "place" : "Seoul Chung-ang University",
   "description" : "The last concert of BTS in 2020! Enjoy it!",
   "max_audience" : 3000,
   "price" : 20000
@@ -102,7 +97,6 @@
 | pk | Integer | pk of concert |
 | title | String | title of concert |
 | date | Date | start date of concert |
-| place | String | place of concert |
 | description | String | description of concert |
 | max_audience | Integer | limit of max audience count |
 | price | Integer | price of concert |
@@ -114,7 +108,6 @@
   "title" : "BTS 2020 Last Concert",
   "performer" : "BTS",
   "date" : "2020-10-27T17:13:40+00:00",
-  "place" : "Seoul Chung-ang University",
   "description" : "The last concert of BTS in 2020! Enjoy it!",
   "max_audience" : 3000,
   "price" : 20000
@@ -140,7 +133,6 @@
   "title" : "BTS 2020 Last Concert",
   "performer" : "BTS",
   "date" : "2020-10-27T17:13:40+00:00",
-  "place" : "Seoul Chung-ang University",
   "description" : "The last concert of BTS in 2020! Enjoy it!",
   "max_audience" : 3000,
   "price" : 20000
