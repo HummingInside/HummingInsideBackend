@@ -1,4 +1,4 @@
-package com.backend.core.user;
+package com.backend.core.concert;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,23 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class Category {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     @Builder
-    public User(String name){
+    public Category(String name){
         this.name = name;
     }
 }
