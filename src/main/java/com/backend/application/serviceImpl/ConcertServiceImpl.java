@@ -5,6 +5,7 @@ import com.backend.application.service.ConcertService;
 import com.backend.core.concert.CategoryRepository;
 import com.backend.core.concert.Concert;
 import com.backend.core.concert.ConcertRepository;
+import com.backend.core.concert.ConcertStatus;
 import com.backend.core.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,10 @@ public class ConcertServiceImpl implements ConcertService {
     public List<ConcertSimpleResponse> findAll(ConcertListRequest request) {
         // TODO : validate request
         // TODO : pagination
-        return concertRepository.findAllByCriteria(request.getConcertStatus(),
+
+        ConcertStatus status = request.getConcertStatus() == null ?
+                null : ConcertStatus.valueOf(request.getConcertStatus());
+        return concertRepository.findAllByCriteria(status,
                 request.getCategoryId(), request.getPerformerName())
                 .stream().map(ConcertSimpleResponse::new).collect(toList());
     }

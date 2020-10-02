@@ -8,9 +8,10 @@ import java.util.List;
 
 public interface ConcertRepository extends JpaRepository<Concert, Long> {
 
-    @Query("select c from Concert c where c.status= :status " +
-            "and c.category.id= :categoryId and c.performer.name like :name")
-    List<Concert> findAllByCriteria(@Param("status") String status,
+    @Query("select c from Concert c where (:status is null or c.status= :status) " +
+            "and (:categoryId is null or c.category.id= :categoryId) " +
+            "and (:name is null or c.performer.name like :name)")
+    List<Concert> findAllByCriteria(@Param("status") ConcertStatus status,
                                     @Param("categoryId") Long categoryId,
                                     @Param("name") String name);
 }
