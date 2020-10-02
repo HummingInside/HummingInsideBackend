@@ -10,5 +10,7 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 
     @Query("select c from Concert c where c.status= :status " +
             "and c.category.id= :categoryId and c.performer.name like :name")
-    List<Concert> findAllByCriteria(@Param("status") String status, Long categoryId, String name);
+    List<Concert> findAllByCriteria(@Param("status") String status,
+                                    @Param("categoryId") Long categoryId,
+                                    @Param("name") String name);
 }
