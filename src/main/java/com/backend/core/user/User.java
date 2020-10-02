@@ -19,10 +19,16 @@ public class User {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private String name;
+    private String userId;
+    private String userPassword;
+    private String userEmail;
+    private String userName;
 
     @Builder
-    public User(String name){
-        this.name = name;
+    public User(String id, String password, String email, String name){
+        this.userId = id;
+        this.userPassword = password;
+        this.userEmail = email;
+        this.userName = name;
     }
 }
