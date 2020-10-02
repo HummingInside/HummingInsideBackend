@@ -1,6 +1,7 @@
 package com.backend.core.concert;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class Category {
 

@@ -1,6 +1,8 @@
 package com.backend.core.user;
 
+import com.backend.core.BaseTimeEntity;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +14,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

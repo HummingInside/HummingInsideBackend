@@ -3,6 +3,7 @@ package com.backend.core.concert;
 import com.backend.core.BaseTimeEntity;
 import com.backend.core.user.User;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
 @Entity
 public class Concert extends BaseTimeEntity {
 
@@ -57,5 +59,15 @@ public class Concert extends BaseTimeEntity {
         this.maxAudience = maxAudience;
         this.price = price;
         likesCount = 0;
+    }
+
+    public void updateInfo(String title, LocalDateTime date, String description,
+                           int maxAudience, int price){
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        // TODO : validate
+        this.maxAudience = maxAudience;
+        this.price = price;
     }
 }
