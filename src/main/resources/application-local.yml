@@ -1,10 +1,17 @@
-spring:
-  jpa:
-    show-sql: true
-  h2:
-    console:
-      enabled: true
+server:
+  address: localhost
+  port: 8080
 
+spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 1q2w3e4r
+    url: jdbc:mysql://localhost:3306/humminginside?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
