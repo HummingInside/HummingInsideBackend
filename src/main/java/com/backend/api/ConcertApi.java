@@ -37,7 +37,7 @@ public class ConcertApi {
     }
 
     @GetMapping
-    public ResponseEntity<?> getList(@RequestBody ConcertListRequest request){
+    public ResponseEntity<?> getList(ConcertListRequest request){
         List<ConcertSimpleResponse> responses = concertService.findAll(request);
         return ResponseEntity.ok(responses);
     }
