@@ -4,6 +4,7 @@ import com.backend.api.exception.ResourceNotFoundException;
 import com.backend.application.dto.concert.*;
 import com.backend.application.serviceImpl.ConcertServiceImpl;
 import com.backend.core.member.Member;
+import com.backend.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,12 @@ import java.util.List;
 public class ConcertApi {
 
     private final ConcertServiceImpl concertService;
+    private final MemberRepository memberRepository;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ConcertCreateRequest request, Member member){
+    public ResponseEntity<?> create(@RequestBody ConcertCreateRequest request){
         // TODO : get member
+        Member member = memberRepository.findByName("junyoung").get();
         ConcertDetailResponse response = concertService.create(request, member);
         if(response == null){
             throw new ResourceNotFoundException();
@@ -44,8 +47,9 @@ public class ConcertApi {
 
     @PostMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,
-                                    @RequestBody ConcertUpdateRequest request, Member member){
+                                    @RequestBody ConcertUpdateRequest request){
         // TODO : get member
+        Member member = memberRepository.findByName("junyoung").get();
         ConcertDetailResponse response = concertService.update(id, request, member);
         if(response == null){
             throw new ResourceNotFoundException();
