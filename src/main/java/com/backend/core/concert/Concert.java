@@ -50,7 +50,7 @@ public class Concert extends BaseTimeEntity {
         this.title = title;
         this.performer = performer;
         this.category = category;
-        status = ConcertStatus.ENDED;
+        status = ConcertStatus.UPCOMING;
         this.date = date;
         this.description = description;
         this.maxAudience = maxAudience;
