@@ -6,7 +6,7 @@ import com.backend.core.concert.CategoryRepository;
 import com.backend.core.concert.Concert;
 import com.backend.core.concert.ConcertRepository;
 import com.backend.core.concert.ConcertStatus;
-import com.backend.core.user.User;
+import com.backend.core.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +24,10 @@ public class ConcertServiceImpl implements ConcertService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public ConcertDetailResponse create(ConcertCreateRequest request, User user) {
+    public ConcertDetailResponse create(ConcertCreateRequest request, Member member) {
         // TODO : validate request
         return categoryRepository.findById(request.getCategoryId()).map(category -> {
-            Concert concert = concertRepository.save(request.toEntity(user, category));
+            Concert concert = concertRepository.save(request.toEntity(member, category));
             return new ConcertDetailResponse(concert);
         }).orElse(null);
     }
@@ -54,7 +54,7 @@ public class ConcertServiceImpl implements ConcertService {
     }
 
     @Override
-    public ConcertDetailResponse update(Long id, ConcertUpdateRequest request, User user) {
+    public ConcertDetailResponse update(Long id, ConcertUpdateRequest request, Member member) {
         // TODO : validate request
         return concertRepository.findById(id).map(concert -> {
             concert.updateInfo(request.getTitle(), request.getDate(), request.getDescription(),

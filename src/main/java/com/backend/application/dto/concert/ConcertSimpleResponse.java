@@ -25,7 +25,7 @@ public class ConcertSimpleResponse {
     public ConcertSimpleResponse(Concert concert){
         id = concert.getId();
         title = concert.getTitle();
-        performer = concert.getPerformer().getUserName();
+        performer = concert.getPerformer().getName();
         date = concert.getDate();
         description = concert.getDescription();
         maxAudience = concert.getMaxAudience();
