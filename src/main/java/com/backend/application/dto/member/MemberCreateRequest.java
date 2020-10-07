@@ -9,25 +9,25 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class MemberDto {
+public class MemberCreateRequest {
+
     private Long id;
     private String email;
     private String password;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private String name;
 
     public Member toEntity(){
         return Member.builder()
-                .id(id)
                 .email(email)
                 .password(password)
+                .name(name)
                 .build();
     }
 
     @Builder
-    public MemberDto(Long id, String email, String password) {
-        this.id = id;
+    public MemberCreateRequest(String email, String password, String name) {
         this.email = email;
         this.password = password;
+        this.name = name;
     }
 }

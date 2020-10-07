@@ -2,7 +2,7 @@ package com.backend.application.dto.concert;
 
 import com.backend.core.concert.Category;
 import com.backend.core.concert.Concert;
-import com.backend.core.user.User;
+import com.backend.core.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +20,10 @@ public class ConcertCreateRequest {
     private int maxAudience;
     private int price;
 
-    public Concert toEntity(User user, Category category){
+    public Concert toEntity(Member member, Category category){
         return Concert.builder()
                 .title(title)
-                .performer(user)
+                .performer(member)
                 .category(category)
                 .date(date)
                 .description(description)

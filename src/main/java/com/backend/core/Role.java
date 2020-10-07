@@ -2,12 +2,14 @@ package com.backend.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor
-public enum  Role {
+@RequiredArgsConstructor
+public enum Role {
+
     ADMIN("ROLE_ADMIN"),
     MEMBER("ROLE_MEMBER");
 
-    private String value;
+    private final String value;
 }

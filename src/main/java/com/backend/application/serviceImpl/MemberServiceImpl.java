@@ -1,6 +1,6 @@
 package com.backend.application.serviceImpl;
 
-import com.backend.application.dto.member.MemberDto;
+import com.backend.application.dto.member.MemberCreateRequest;
 import com.backend.application.service.MemberService;
 import com.backend.core.member.Member;
 import com.backend.core.member.MemberRepository;
@@ -26,21 +26,21 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
 
     @Transactional
-    public Long joinUser(MemberDto memberDto){
+    public Long joinUser(MemberCreateRequest request){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        return memberRepository.save(memberDto.toEntity()).getId();
+        return memberRepository.save(request.toEntity()).getId();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<Member> userEntityWrapper = memberRepository.findByEmail(userEmail);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Member> userEntityWrapper = memberRepository.findByEmail(email);
         Member userEntity = userEntityWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if (("admin@example.com").equals(userEmail)) {
+        if (("admin@example.com").equals(email)) {
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));

@@ -1,11 +1,8 @@
 package com.backend.core.concert;
 
 import com.backend.core.BaseTimeEntity;
-import com.backend.core.user.User;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.backend.core.member.Member;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +10,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.LAZY;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = {"id"}, callSuper = false)
 @Entity
 public class Concert extends BaseTimeEntity {
@@ -26,8 +23,8 @@ public class Concert extends BaseTimeEntity {
     private String title;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_id")
-    private User performer;
+    @JoinColumn(name = "performer_id")
+    private Member performer;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "category_id")
@@ -48,7 +45,7 @@ public class Concert extends BaseTimeEntity {
     private int likesCount;
 
     @Builder
-    public Concert(String title, User performer, Category category, LocalDateTime date,
+    public Concert(String title, Member performer, Category category, LocalDateTime date,
                    String description, int maxAudience, int price){
         this.title = title;
         this.performer = performer;

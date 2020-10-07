@@ -1,13 +1,13 @@
 package com.backend.application.service;
 
-import com.backend.application.dto.member.MemberDto;
+import com.backend.application.dto.member.MemberCreateRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface MemberService extends UserDetailsService {
 
-    public Long joinUser(MemberDto memberDto);
+    Long joinUser(MemberCreateRequest request);
 
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException;
+    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 }

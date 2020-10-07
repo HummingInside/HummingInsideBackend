@@ -1,0 +1,17 @@
+insert into member (id, created_date, modified_date, name, password, email) values (1, now(), now(), 'junyoung', '1q2w3e4r', 'junyoung@gmail.com')
+insert into member (id, created_date, modified_date, name, password, email) values (2, now(), now(), 'hongsub', '1q2w3e4r', 'hongsub@gmail.com')
+insert into member (id, created_date, modified_date, name, password, email) values (3, now(), now(), 'sekyo', '1q2w3e4r', 'sekyo@gmail.com')
+
+insert into category (id, name) values (10, 'k-pop')
+insert into category (id, name) values (20, 'j-pop')
+insert into category (id, name) values (30, 'classic')
+insert into category (id, name) values (40, 'jazz')
+
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (101, now(), now(), now(), 'description1', 4, 1000, 10000, 'UPCOMING', 'title1', 10, 1)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (102, now(), now(), now(), 'description2', 3, 2000, 20000, 'ONAIR', 'title2', 20, 2)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (103, now(), now(), now(), 'description3', 2, 3000, 30000, 'ENDED', 'title3', 20, 3)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (104, now(), now(), now(), 'description4', 0, 4000, 40000, 'ONAIR', 'title4', 30, 3)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (105, now(), now(), now(), 'description5', 4, 5000, 50000, 'UPCOMING', 'title1', 10, 1)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (106, now(), now(), now(), 'description6', 3, 6000, 60000, 'ONAIR', 'title2', 20, 2)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (107, now(), now(), now(), 'description7', 2, 7000, 70000, 'ENDED', 'title3', 20, 3)
+insert into concert (id, created_date, modified_date, date, description, likes_count, max_audience, price, status, title, category_id, performer_id) values (108, now(), now(), now(), 'description8', 0, 8000, 80000, 'ONAIR', 'title4', 30, 3)
