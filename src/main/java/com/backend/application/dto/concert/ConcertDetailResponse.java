@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class ConcertDetailResponse extends ConcertSimpleResponse {
+
     private CategorySimple category;
     private ConcertStatus status;
 

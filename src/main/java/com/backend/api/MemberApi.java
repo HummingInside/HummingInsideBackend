@@ -1,63 +1,55 @@
 package com.backend.api;
 
-import com.backend.application.dto.member.MemberDto;
+import com.backend.application.dto.member.MemberCreateRequest;
 import com.backend.application.service.MemberService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 @RestController
-//@Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MemberApi {
+    
+    private final MemberService memberService;
 
-    @Autowired
-    private MemberService memberService;
-
-    @RequestMapping(path = "/", method = GET)
+    @GetMapping
     public String index() {
         return "/index";
     }
 
-    @RequestMapping(path = "/user/signup", method = GET)
+    @GetMapping("/signup")
     public String dispSignup() {
         return "/signup";
     }
 
-    @RequestMapping(path = "/user/signup", method = POST)
-    public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
-        return "redirect:/user/login";
+    @PostMapping("/signup")
+    public String execSignup(MemberCreateRequest request) {
+        memberService.joinUser(request);
+        return "redirect:/signin";
     }
 
-    @RequestMapping(path = "/user/login", method = GET)
+    @GetMapping("/signin")
     public String dispLogin() {
-        return "/login";
+        return "/signin";
     }
 
-    @RequestMapping(path = "/user/login/result", method = GET)
+    @GetMapping("/signin/result")
     public String dispLoginResult() {
         return "/loginSuccess";
     }
 
-    @RequestMapping(path = "/user/logout/result", method = GET)
+    @GetMapping("/logout/result")
     public String dispLogout() {
         return "/logout";
     }
 
-    @RequestMapping(path = "/user/denied", method = GET)
+    @GetMapping("/denied")
     public String dispDenied() {
         return "/denied";
     }
 
-    @RequestMapping(path = "/admin", method = GET)
+    @GetMapping("/admin")
     public String dispAdmin() {
         return "/admin";
     }
