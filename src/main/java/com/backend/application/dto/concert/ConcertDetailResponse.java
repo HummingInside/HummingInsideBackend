@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 public class ConcertDetailResponse extends ConcertSimpleResponse {
 
     private CategorySimple category;
-    private ConcertStatus status;
 
     public ConcertDetailResponse(Concert concert){
         super(concert);
         category = new CategorySimple(concert.getCategory());
-        status = concert.getStatus();
     }
 }
 

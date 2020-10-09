@@ -19,6 +19,7 @@ public class ConcertCreateRequest {
     private String description;
     private int maxAudience;
     private int price;
+    private String imgUrl;
 
     public Concert toEntity(Member member, Category category){
         return Concert.builder()
@@ -26,6 +27,7 @@ public class ConcertCreateRequest {
                 .performer(member)
                 .category(category)
                 .date(date)
+                .imgUrl(imgUrl)
                 .description(description)
                 .maxAudience(maxAudience)
                 .price(price).build();

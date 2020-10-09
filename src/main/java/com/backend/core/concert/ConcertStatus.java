@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ConcertStatus {
 
-    ONAIR("방송중"),
-    UPCOMING("준비중"),
-    ENDED("종료된");
+    ONAIR("ON-AIR"),
+    UPCOMING("UPCOMING"),
+    ENDED("ENDED");
 
     private final String desc;
 }
