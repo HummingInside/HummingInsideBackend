@@ -15,6 +15,7 @@ public class ConcertUpdateRequest {
     private LocalDateTime date;
     private String description;
     private int maxAudience;
+    private int currentAudience;
     private int price;
     private String imgUrl;
 }
