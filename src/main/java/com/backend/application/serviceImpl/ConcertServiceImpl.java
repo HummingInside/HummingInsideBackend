@@ -62,7 +62,8 @@ public class ConcertServiceImpl implements ConcertService {
                 return null;
             }
             concert.updateInfo(request.getTitle(), request.getDate(), request.getDescription(),
-                    request.getMaxAudience(), request.getPrice(), request.getImgUrl());
+                    request.getMaxAudience(), request.getCurrentAudience(), request.getPrice(),
+                    request.getImgUrl());
             return new ConcertDetailResponse(concert);
         }).orElse(null);
     }

@@ -3,6 +3,7 @@ package com.backend.core.concert;
 import com.backend.core.BaseTimeEntity;
 import com.backend.core.member.Member;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -37,14 +38,19 @@ public class Concert extends BaseTimeEntity {
     private LocalDateTime date;
     private String description;
     private int maxAudience;
+
+    @ColumnDefault("0")
+    private int currentAudience;
     private int price;
+
+    @ColumnDefault("0")
     private int likesCount;
     private String imgUrl;
 
     @Builder
     public Concert(String title, Member performer, Category category, LocalDateTime date,
                    String description, int maxAudience, int price, String imgUrl){
-        updateInfo(title, date, description, maxAudience, price, imgUrl);
+        updateInfo(title, date, description, maxAudience, 0, price, imgUrl);
         this.performer = performer;
         this.category = category;
         status = ConcertStatus.UPCOMING;
@@ -52,12 +58,13 @@ public class Concert extends BaseTimeEntity {
     }
 
     public void updateInfo(String title, LocalDateTime date, String description,
-                           int maxAudience, int price, String imgUrl){
+                           int maxAudience, int currentAudience, int price, String imgUrl){
         this.title = title;
         this.description = description;
         this.date = date;
         // TODO : validate
         this.maxAudience = maxAudience;
+        this.currentAudience = currentAudience;
         this.price = price;
         this.imgUrl = imgUrl;
     }
