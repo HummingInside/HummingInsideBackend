@@ -17,19 +17,16 @@ public class ConcertSimpleResponse {
     private String title;
     private String performer;
     private LocalDateTime date;
-    private String description;
-    private int maxAudience;
-    private int price;
     private int likesCount;
+    private String status;
+    private String imgUrl;
 
     public ConcertSimpleResponse(Concert concert){
         id = concert.getId();
         title = concert.getTitle();
         performer = concert.getPerformer().getName();
         date = concert.getDate();
-        description = concert.getDescription();
-        maxAudience = concert.getMaxAudience();
-        price = concert.getPrice();
+        status = concert.getStatus().getDesc();
         likesCount = concert.getLikesCount();
     }
 }

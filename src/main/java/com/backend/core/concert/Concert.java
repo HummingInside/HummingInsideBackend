@@ -35,36 +35,30 @@ public class Concert extends BaseTimeEntity {
     private ConcertStatus status;
 
     private LocalDateTime date;
-
     private String description;
-
     private int maxAudience;
-
     private int price;
-
     private int likesCount;
+    private String imgUrl;
 
     @Builder
     public Concert(String title, Member performer, Category category, LocalDateTime date,
-                   String description, int maxAudience, int price){
-        this.title = title;
+                   String description, int maxAudience, int price, String imgUrl){
+        updateInfo(title, date, description, maxAudience, price, imgUrl);
         this.performer = performer;
         this.category = category;
         status = ConcertStatus.UPCOMING;
-        this.date = date;
-        this.description = description;
-        this.maxAudience = maxAudience;
-        this.price = price;
         likesCount = 0;
     }
 
     public void updateInfo(String title, LocalDateTime date, String description,
-                           int maxAudience, int price){
+                           int maxAudience, int price, String imgUrl){
         this.title = title;
         this.description = description;
         this.date = date;
         // TODO : validate
         this.maxAudience = maxAudience;
         this.price = price;
+        this.imgUrl = imgUrl;
     }
 }

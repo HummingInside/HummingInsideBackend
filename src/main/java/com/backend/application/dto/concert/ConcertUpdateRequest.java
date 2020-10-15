@@ -16,4 +16,5 @@ public class ConcertUpdateRequest {
     private String description;
     private int maxAudience;
     private int price;
+    private String imgUrl;
 }
