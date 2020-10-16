@@ -36,6 +36,8 @@ public class Concert extends BaseTimeEntity {
     private ConcertStatus status;
 
     private LocalDateTime date;
+
+    @Lob
     private String description;
     private int maxAudience;
 
