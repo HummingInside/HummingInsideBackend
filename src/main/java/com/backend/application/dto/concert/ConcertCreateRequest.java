@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 public class ConcertCreateRequest {
     private String title;
     private Long categoryId;
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String description;
     private int maxAudience;
     private int price;
@@ -26,7 +27,8 @@ public class ConcertCreateRequest {
                 .title(title)
                 .performer(member)
                 .category(category)
-                .date(date)
+                .startDate(startDate)
+                .endDate(endDate)
                 .imgUrl(imgUrl)
                 .description(description)
                 .maxAudience(maxAudience)

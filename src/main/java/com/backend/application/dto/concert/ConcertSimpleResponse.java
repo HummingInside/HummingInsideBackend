@@ -14,7 +14,7 @@ public class ConcertSimpleResponse {
     private Long id;
     private String title;
     private String performer;
-    private String date;
+    private String startDate;
     private int likesCount;
     private String status;
     private int currentAudience;
@@ -25,7 +25,7 @@ public class ConcertSimpleResponse {
         id = concert.getId();
         title = concert.getTitle();
         performer = concert.getPerformer().getName();
-        date = concert.getDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
+        startDate = concert.getStartDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
         status = concert.getStatus().getDesc();
         likesCount = concert.getLikesCount();
         currentAudience = concert.getCurrentAudience();
