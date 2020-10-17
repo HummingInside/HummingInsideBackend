@@ -35,7 +35,8 @@ public class Concert extends BaseTimeEntity {
     @Column(name = "status")
     private ConcertStatus status;
 
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @Lob
     private String description;
@@ -50,20 +51,21 @@ public class Concert extends BaseTimeEntity {
     private String imgUrl;
 
     @Builder
-    public Concert(String title, Member performer, Category category, LocalDateTime date,
-                   String description, int maxAudience, int price, String imgUrl){
-        updateInfo(title, date, description, maxAudience, 0, price, imgUrl);
+    public Concert(String title, Member performer, Category category, LocalDateTime startDate,
+                   LocalDateTime endDate, String description, int maxAudience, int price, String imgUrl){
+        updateInfo(title, startDate, endDate, description, maxAudience, 0, price, imgUrl);
         this.performer = performer;
         this.category = category;
         status = ConcertStatus.UPCOMING;
         likesCount = 0;
     }
 
-    public void updateInfo(String title, LocalDateTime date, String description,
+    public void updateInfo(String title, LocalDateTime startDate, LocalDateTime endDate, String description,
                            int maxAudience, int currentAudience, int price, String imgUrl){
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         // TODO : validate
         this.maxAudience = maxAudience;
         this.currentAudience = currentAudience;

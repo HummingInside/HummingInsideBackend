@@ -1,6 +1,5 @@
 package com.backend.application.serviceImpl;
 
-import com.backend.api.exception.NoAuthorizationException;
 import com.backend.application.dto.concert.*;
 import com.backend.application.service.ConcertService;
 import com.backend.core.concert.CategoryRepository;
@@ -61,9 +60,9 @@ public class ConcertServiceImpl implements ConcertService {
             if(!concert.getPerformer().getId().equals(member.getId())){
                 return null;
             }
-            concert.updateInfo(request.getTitle(), request.getDate(), request.getDescription(),
-                    request.getMaxAudience(), request.getCurrentAudience(), request.getPrice(),
-                    request.getImgUrl());
+            concert.updateInfo(request.getTitle(), request.getStartDate(), request.getEndDate(),
+                    request.getDescription(), request.getMaxAudience(), request.getCurrentAudience(),
+                    request.getPrice(), request.getImgUrl());
             return new ConcertDetailResponse(concert);
         }).orElse(null);
     }

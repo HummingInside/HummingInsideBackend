@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 public class ConcertUpdateRequest {
 
     private String title;
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String description;
     private int maxAudience;
     private int currentAudience;
