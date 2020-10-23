@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(of = {"id"}, callSuper = false)
 @Builder
 @Entity
-public class Member implements UserDetails {
+public class Member extends BaseTimeEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
