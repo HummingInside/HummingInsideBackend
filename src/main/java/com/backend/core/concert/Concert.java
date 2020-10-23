@@ -3,6 +3,7 @@ package com.backend.core.concert;
 import com.backend.core.BaseTimeEntity;
 import com.backend.core.member.Member;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,30 +35,40 @@ public class Concert extends BaseTimeEntity {
     @Column(name = "status")
     private ConcertStatus status;
 
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    @Lob
     private String description;
     private int maxAudience;
+
+    @ColumnDefault("0")
+    private int currentAudience;
     private int price;
+
+    @ColumnDefault("0")
     private int likesCount;
     private String imgUrl;
 
     @Builder
-    public Concert(String title, Member performer, Category category, LocalDateTime date,
-                   String description, int maxAudience, int price, String imgUrl){
-        updateInfo(title, date, description, maxAudience, price, imgUrl);
+    public Concert(String title, Member performer, Category category, LocalDateTime startDate,
+                   LocalDateTime endDate, String description, int maxAudience, int price, String imgUrl){
+        updateInfo(title, startDate, endDate, description, maxAudience, 0, price, imgUrl);
         this.performer = performer;
         this.category = category;
         status = ConcertStatus.UPCOMING;
         likesCount = 0;
     }
 
-    public void updateInfo(String title, LocalDateTime date, String description,
-                           int maxAudience, int price, String imgUrl){
+    public void updateInfo(String title, LocalDateTime startDate, LocalDateTime endDate, String description,
+                           int maxAudience, int currentAudience, int price, String imgUrl){
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         // TODO : validate
         this.maxAudience = maxAudience;
+        this.currentAudience = currentAudience;
         this.price = price;
         this.imgUrl = imgUrl;
     }
