@@ -1,22 +1,28 @@
 package com.backend.api;
 
-import com.backend.application.dto.member.MemberCreateRequest;
+import com.backend.application.dto.member.JwtTokenProvider;
 import com.backend.application.service.MemberService;
+import com.backend.core.member.Member;
+import com.backend.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberApi {
-    
-    private final MemberService memberService;
 
-    @GetMapping
-    public String index() {
-        return "/index";
-    }
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
+
+    private final MemberService memberService;
 
     @GetMapping("/signup")
     public String dispSignup() {
@@ -24,33 +30,23 @@ public class MemberApi {
     }
 
     @PostMapping("/signup")
-    public String execSignup(MemberCreateRequest request) {
-        memberService.joinUser(request);
-        return "redirect:/signin";
+    public Long execSignup(@RequestBody Map<String, String> member) {
+        return memberRepository.save(Member.builder()
+                .email(member.get("email"))
+                .name(member.get("name"))
+                .password(passwordEncoder.encode(member.get("password")))
+                .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 USER 로 설정
+                .build()).getId();
     }
 
-    @GetMapping("/signin")
-    public String dispLogin() {
-        return "/signin";
+    @PostMapping("/signin")
+    public String dispLogin(@RequestBody Map<String, String> user) {
+        Member member = memberRepository.findByEmail(user.get("email"))
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
+        if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
 
-    @GetMapping("/signin/result")
-    public String dispLoginResult() {
-        return "/loginSuccess";
-    }
-
-    @GetMapping("/logout/result")
-    public String dispLogout() {
-        return "/logout";
-    }
-
-    @GetMapping("/denied")
-    public String dispDenied() {
-        return "/denied";
-    }
-
-    @GetMapping("/admin")
-    public String dispAdmin() {
-        return "/admin";
-    }
 }
