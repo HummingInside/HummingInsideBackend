@@ -6,7 +6,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class SocketController {
+public class SignalingSocketController {
+
     @MessageMapping("/{concert_pk}")
     @SendTo("/listen/{concert_pk}")
     public SocketMessage forwarding(SocketMessage message) throws Exception {
