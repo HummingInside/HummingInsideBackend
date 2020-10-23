@@ -18,9 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(authInterceptor).excludePathPatterns("/signin", "/signout", "/signup");
     }
 
-    @Override
+    /*@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*");
-    }
+    }*/
 }
