@@ -5,6 +5,13 @@ insert into member (id, created_date, modified_date, name, password, email) valu
 insert into member (id, created_date, modified_date, name, password, email) values (105, now(), now(), 'Jiyoung Baek', '1q2w3e4r', 'sample5@gmail.com')
 insert into member (id, created_date, modified_date, name, password, email) values (106, now(), now(), 'KBS', '1q2w3e4r', 'sample6@gmail.com')
 
+insert into member_roles (member_id, roles) values (101, 'ROLE_USER')
+insert into member_roles (member_id, roles) values (102, 'ROLE_USER')
+insert into member_roles (member_id, roles) values (103, 'ROLE_USER')
+insert into member_roles (member_id, roles) values (104, 'ROLE_USER')
+insert into member_roles (member_id, roles) values (105, 'ROLE_USER')
+insert into member_roles (member_id, roles) values (106, 'ROLE_USER')
+
 insert into category (id, name) values (50, 'k-pop')
 insert into category (id, name) values (51, 'j-pop')
 insert into category (id, name) values (52, 'classic')
