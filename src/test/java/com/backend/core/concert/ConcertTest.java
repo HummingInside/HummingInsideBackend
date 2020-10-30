@@ -1,7 +1,7 @@
 package com.backend.core.concert;
 
-import com.backend.core.user.User;
-import com.backend.core.user.UserRepository;
+import com.backend.core.member.Member;
+import com.backend.core.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +18,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ConcertTest {
 
     @Autowired ConcertRepository concertRepository;
-    @Autowired UserRepository userRepository;
+    @Autowired MemberRepository memberRepository;
     @Autowired CategoryRepository categoryRepository;
 
     @Test
     @DisplayName("create and read a concert")
     void createAndReadConcert(){
-        User performer = createUser();
+        Member performer = createMember();
         Category category = createCategory();
         Concert concert = Concert.builder()
                 .title("BTS 2020 Last Concert")
                 .performer(performer)
                 .category(category)
-                .date(LocalDateTime.of(2020, 12, 29, 22, 0, 0))
+//                .date(LocalDateTime.of(2020, 12, 29, 22, 0, 0))
                 .description("This is the last concert of BTS in 2020!")
                 .maxAudience(10000)
                 .price(55000)
@@ -47,8 +47,8 @@ class ConcertTest {
 
     }
 
-    private User createUser(){
-        return userRepository.save(User.builder().name("Junyoung").build());
+    private Member createMember(){
+        return memberRepository.save(Member.builder().name("Junyoung").build());
     }
 
     private Category createCategory(){
