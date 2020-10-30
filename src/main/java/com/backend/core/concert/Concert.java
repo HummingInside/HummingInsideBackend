@@ -72,4 +72,8 @@ public class Concert extends BaseTimeEntity {
         this.price = price;
         this.imgUrl = imgUrl;
     }
+
+    public void updateImage(String imgUrl){
+        this.imgUrl = imgUrl;
+    }
 }
