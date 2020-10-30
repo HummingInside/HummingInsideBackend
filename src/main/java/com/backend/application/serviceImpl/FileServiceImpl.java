@@ -5,12 +5,15 @@ import com.backend.config.StorageProperties;
 import com.backend.core.concert.Concert;
 import com.backend.core.concert.ConcertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,5 +48,14 @@ public class FileServiceImpl implements FileService {
         Optional<Concert> concert = concertRepository.findById(id);
         concert.ifPresent(c -> c.updateImage(fileName));
         return fileName;
+    }
+
+    public Resource load(String fileName) throws MalformedURLException {
+        Path filePath = directory.resolve(fileName).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
+        if (resource.exists() || resource.isReadable()) {
+            return resource;
+        }
+        return null;
     }
 }

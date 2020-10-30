@@ -6,12 +6,15 @@ import com.backend.application.service.FileService;
 import com.backend.application.serviceImpl.ConcertServiceImpl;
 import com.backend.core.member.Member;
 import com.backend.core.member.MemberRepository;
+import org.springframework.core.io.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,7 +29,7 @@ public class ConcertApi {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ConcertCreateRequest request){
         // TODO : get member
-        Member member = memberRepository.findByName("junyoung").get();
+        Member member = memberRepository.findByName("psy").get();
         ConcertDetailResponse response = concertService.create(request, member);
         if(response == null){
             throw new ResourceNotFoundException();
@@ -69,5 +72,15 @@ public class ConcertApi {
             throw new ResourceNotFoundException();
         }
         return ResponseEntity.ok(fileName);
+    }
+
+    @GetMapping("/files/{filename}")
+    public ResponseEntity<?> serveImage(@PathVariable String filename) throws MalformedURLException {
+        Resource file = fileService.load(filename);
+        if(file == null){
+            throw new ResourceNotFoundException();
+        }
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 }
