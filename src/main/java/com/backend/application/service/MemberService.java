@@ -7,7 +7,5 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface MemberService extends UserDetailsService {
 
-    //Long joinUser(MemberCreateRequest request);
-
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
