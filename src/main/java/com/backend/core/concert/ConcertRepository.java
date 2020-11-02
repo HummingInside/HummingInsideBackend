@@ -14,4 +14,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
     List<Concert> findAllByCriteria(@Param("status") ConcertStatus status,
                                     @Param("categoryId") Long categoryId,
                                     @Param("performerName") String performerName);
+
+    List<Concert> findAllByPerformer_Id(Long PerformerId);
 }
