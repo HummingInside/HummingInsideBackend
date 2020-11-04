@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Setter
@@ -14,7 +15,7 @@ public class ConcertSimpleResponse {
     private Long id;
     private String title;
     private String performer;
-    private String startDate;
+    private LocalDateTime startDate;
     private int likesCount;
     private String status;
     private int currentAudience;
@@ -25,7 +26,8 @@ public class ConcertSimpleResponse {
         id = concert.getId();
         title = concert.getTitle();
         performer = concert.getPerformer().getName();
-        startDate = concert.getStartDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
+        startDate = concert.getStartDate();
+//                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
         status = concert.getStatus().getDesc();
         likesCount = concert.getLikesCount();
         currentAudience = concert.getCurrentAudience();
