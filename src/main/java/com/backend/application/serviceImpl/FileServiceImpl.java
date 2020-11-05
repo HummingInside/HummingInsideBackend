@@ -68,12 +68,13 @@ public class FileServiceImpl implements FileService {
         return null;
     }
 
-    public String delete(Long id, String newFile) throws IOException {
+    public String delete(Long id, String newFile) {
         Concert concert = concertRepository.getOne(id);
         Path filePath = directory.resolve(concert.getImgUrl()).normalize();
         File prevFile = new File(filePath.toString());
+        boolean isDeleted = false;
         if(prevFile.exists() && newFile != null){
-            boolean isDeleted = prevFile.delete();
+            isDeleted = prevFile.delete();
         }
         return filePath.toString();
     }

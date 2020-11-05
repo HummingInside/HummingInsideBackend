@@ -14,4 +14,6 @@ public interface ConcertService {
     List<ConcertSimpleResponse> findAll(ConcertListRequest request);
 
     ConcertDetailResponse update(Long id, ConcertUpdateRequest request, Member member);
+
+    void delete(Long id);
 }

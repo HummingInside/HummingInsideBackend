@@ -4,6 +4,7 @@ import com.backend.api.exception.ResourceNotFoundException;
 import com.backend.application.dto.concert.*;
 import com.backend.application.service.FileService;
 import com.backend.application.serviceImpl.ConcertServiceImpl;
+import com.backend.core.concert.ConcertRepository;
 import com.backend.core.member.Member;
 import com.backend.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,5 +61,14 @@ public class ConcertApi {
             throw new ResourceNotFoundException();
         }
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id) throws IOException {
+        Member member = (Member) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        fileService.delete(id, "delete");
+        concertService.delete(id);
+        return ResponseEntity.ok(id);
     }
 }

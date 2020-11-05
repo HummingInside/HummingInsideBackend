@@ -67,4 +67,8 @@ public class ConcertServiceImpl implements ConcertService {
             return new ConcertDetailResponse(concert);
         }).orElse(null);
     }
+
+    public void delete(Long id) {
+        concertRepository.deleteById(id);
+    }
 }
