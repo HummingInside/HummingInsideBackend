@@ -35,16 +35,3 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
         runningTime = hours + (hours.length() > 0 && minutes.length() > 0 ? " and " : "") + minutes;
     }
 }
-
-@Setter
-@NoArgsConstructor
-@Getter
-class CategorySimple {
-    private Long id;
-    private String name;
-
-    public CategorySimple(Category category){
-        id = category.getId();
-        name = category.getName();
-    }
-}
