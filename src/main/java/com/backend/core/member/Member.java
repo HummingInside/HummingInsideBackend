@@ -33,13 +33,6 @@ public class Member extends BaseTimeEntity implements UserDetails {
     @Column(length = 100, nullable = false, updatable = false)
     private String name;
 
-    /*@Builder
-    public Member(String email, String password, String name) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-    }*/
-
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();

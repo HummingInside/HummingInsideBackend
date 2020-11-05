@@ -1,5 +1,6 @@
 package com.backend.core.concert;
 
+import com.backend.application.dto.concert.ConcertSimpleResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
     List<Concert> findAllByCriteria(@Param("status") ConcertStatus status,
                                     @Param("categoryId") Long categoryId,
                                     @Param("performerName") String performerName);
+
+    List<ConcertSimpleResponse> findAllByPerformer_Id(Long PerformerId);
 }
