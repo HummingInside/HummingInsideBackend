@@ -4,13 +4,13 @@ import com.backend.api.exception.ResourceNotFoundException;
 import com.backend.application.dto.concert.*;
 import com.backend.application.service.FileService;
 import com.backend.application.serviceImpl.ConcertServiceImpl;
+import com.backend.core.concert.ConcertRepository;
 import com.backend.core.member.Member;
 import com.backend.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,9 +52,10 @@ public class ConcertApi {
 
     @PostMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,
-                                    @RequestBody ConcertUpdateRequest request){
+                                    @RequestBody ConcertUpdateRequest request) throws IOException {
         Member member = (Member) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
+        fileService.delete(id, request.getImgUrl());
         ConcertDetailResponse response = concertService.update(id, request, member);
         if(response == null){
             throw new ResourceNotFoundException();
@@ -62,13 +63,12 @@ public class ConcertApi {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{id}/upload")
-    public ResponseEntity<?> uploadImage(@PathVariable Long id,
-                                         @RequestBody MultipartFile file) throws IOException {
-        String fileName = fileService.store(id, file);
-        if(fileName == null){
-            throw new ResourceNotFoundException();
-        }
-        return ResponseEntity.ok(fileName);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id) throws IOException {
+        Member member = (Member) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        fileService.delete(id, "delete");
+        concertService.delete(id);
+        return ResponseEntity.ok(id);
     }
 }

@@ -19,7 +19,7 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
     private CategorySimple category;
     private int price;
     private String description;
-    private String endDate;
+    private LocalDateTime endDate;
     private String runningTime;
 
     public ConcertDetailResponse(Concert concert){
@@ -27,23 +27,11 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
         category = new CategorySimple(concert.getCategory());
         price = concert.getPrice();
         description = concert.getDescription();
-        endDate = concert.getEndDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
+        endDate = concert.getEndDate();
+//                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
         Duration duration = Duration.between(concert.getStartDate(), concert.getEndDate());
         String hours = duration.toHours() > 0 ? duration.toHours()+" hours" : "";
-        String minutes = duration.toMinutes() > 0 ? duration.toMinutes()+" minutes" : "";
+        String minutes = duration.toMinutes() > 0 ? duration.toMinutes()%60+" minutes" : "";
         runningTime = hours + (hours.length() > 0 && minutes.length() > 0 ? " and " : "") + minutes;
-    }
-}
-
-@Setter
-@NoArgsConstructor
-@Getter
-class CategorySimple {
-    private Long id;
-    private String name;
-
-    public CategorySimple(Category category){
-        id = category.getId();
-        name = category.getName();
     }
 }

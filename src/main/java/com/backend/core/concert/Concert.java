@@ -70,10 +70,10 @@ public class Concert extends BaseTimeEntity {
         this.maxAudience = maxAudience;
         this.currentAudience = currentAudience;
         this.price = price;
-        this.imgUrl = imgUrl;
+        if(imgUrl != null)
+            this.imgUrl = imgUrl;
     }
-
-    public void updateImage(String imgUrl){
-        this.imgUrl = imgUrl;
+    public void updateCategory(Category category){
+        this.category = category;
     }
 }

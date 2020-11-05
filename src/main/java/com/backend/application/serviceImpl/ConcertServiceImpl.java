@@ -63,7 +63,12 @@ public class ConcertServiceImpl implements ConcertService {
             concert.updateInfo(request.getTitle(), request.getStartDate(), request.getEndDate(),
                     request.getDescription(), request.getMaxAudience(), request.getCurrentAudience(),
                     request.getPrice(), request.getImgUrl());
+            concert.updateCategory(categoryRepository.getOne(request.getCategoryId()));
             return new ConcertDetailResponse(concert);
         }).orElse(null);
+    }
+
+    public void delete(Long id) {
+        concertRepository.deleteById(id);
     }
 }
