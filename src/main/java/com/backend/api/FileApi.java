@@ -6,11 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 @RequiredArgsConstructor
@@ -28,5 +27,11 @@ public class FileApi {
         }
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadImage(@RequestBody MultipartFile file) throws IOException {
+        String fileName = fileService.store(file);
+        return ResponseEntity.ok(fileName);
     }
 }

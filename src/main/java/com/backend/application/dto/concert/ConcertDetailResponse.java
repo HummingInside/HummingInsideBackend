@@ -31,7 +31,7 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
 //                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
         Duration duration = Duration.between(concert.getStartDate(), concert.getEndDate());
         String hours = duration.toHours() > 0 ? duration.toHours()+" hours" : "";
-        String minutes = duration.toMinutes() > 0 ? duration.toMinutes()+" minutes" : "";
+        String minutes = duration.toMinutes() > 0 ? duration.toMinutes()%60+" minutes" : "";
         runningTime = hours + (hours.length() > 0 && minutes.length() > 0 ? " and " : "") + minutes;
     }
 }

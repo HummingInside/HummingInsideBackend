@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,23 +51,14 @@ public class ConcertApi {
 
     @PostMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,
-                                    @RequestBody ConcertUpdateRequest request){
+                                    @RequestBody ConcertUpdateRequest request) throws IOException {
         Member member = (Member) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
+        fileService.delete(id, request.getImgUrl());
         ConcertDetailResponse response = concertService.update(id, request, member);
         if(response == null){
             throw new ResourceNotFoundException();
         }
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/{id}/upload")
-    public ResponseEntity<?> uploadImage(@PathVariable Long id,
-                                         @RequestBody MultipartFile file) throws IOException {
-        String fileName = fileService.store(id, file);
-        if(fileName == null){
-            throw new ResourceNotFoundException();
-        }
-        return ResponseEntity.ok(fileName);
     }
 }

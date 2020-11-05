@@ -8,7 +8,9 @@ import java.net.MalformedURLException;
 
 public interface FileService {
 
-    String store(Long id, MultipartFile file) throws IOException;
+    String store(MultipartFile file) throws IOException;
 
     Resource load(String fileName) throws MalformedURLException;
+
+    String delete(Long id, String newFile) throws IOException;
 }

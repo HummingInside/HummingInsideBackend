@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class ConcertUpdateRequest {
 
     private String title;
+    private Long categoryId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String description;

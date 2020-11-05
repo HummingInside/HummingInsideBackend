@@ -9,17 +9,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
-import java.util.Optional;
 
 @Transactional
 @Service
@@ -34,19 +32,30 @@ public class FileServiceImpl implements FileService {
         this.concertRepository = concertRepository;
     }
 
-    public String store(Long id, MultipartFile file) throws IOException {
+    private String generateFileName(String fileName){
+        final String[] source = {
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "abcdefghijklmnopqrstuvwxyz",
+                "0123456789"
+        };
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 15; i++){
+            int idx = (int)(Math.random()*100%3);
+            int charIdx = (int)(Math.random()*100%source[idx].length());
+            sb.append(source[idx].charAt(charIdx));
+        }
+        String extension = fileName.substring(fileName.lastIndexOf("."));
+        return sb.toString()+extension;
+    }
+
+    public String store(MultipartFile file) throws IOException {
         Files.createDirectories(directory);
-
-        String fileName = StringUtils
-                .cleanPath(Objects.requireNonNull(file.getOriginalFilename()))
-                .replaceAll(" ", "_");
-
-        if(fileName.contains("..")) return null;
+        if(file == null){
+            return "";
+        }
+        String fileName = generateFileName(file.getOriginalFilename());
         Path targetPath = directory.resolve(fileName).normalize();
         Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-
-        Optional<Concert> concert = concertRepository.findById(id);
-        concert.ifPresent(c -> c.updateImage(fileName));
         return fileName;
     }
 
@@ -57,5 +66,15 @@ public class FileServiceImpl implements FileService {
             return resource;
         }
         return null;
+    }
+
+    public String delete(Long id, String newFile) throws IOException {
+        Concert concert = concertRepository.getOne(id);
+        Path filePath = directory.resolve(concert.getImgUrl()).normalize();
+        File prevFile = new File(filePath.toString());
+        if(prevFile.exists() && newFile != null){
+            boolean isDeleted = prevFile.delete();
+        }
+        return filePath.toString();
     }
 }
