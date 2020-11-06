@@ -43,10 +43,6 @@ public class StatisticsApi {
         result.add(responses);
         result.add(responses1);
 
-        //ResponseEntity.ok(responses);
-        //ResponseEntity.ok().body(responses);
-        System.out.println("test");
-
         return ResponseEntity.ok(result);
     }
 }

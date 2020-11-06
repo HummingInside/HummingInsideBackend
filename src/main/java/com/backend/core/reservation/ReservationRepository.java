@@ -16,7 +16,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     //List<ReservationResponse> findAllByPurchaseId(Long userId);
 
-    @Query("SELECT r.id, r.concertId, r.purchaseId, r.purchaseCount, c.startDate, c.title, c.imgUrl, c.price"+
+    @Query("SELECT r.id, r.concertId, r.purchaseId, r.purchaseCount, c.startDate, c.title, c.imgUrl, c.price, r.createdDate"+
             " FROM Reservation r INNER JOIN Concert c ON r.concertId = c.id WHERE r.purchaseId = :userId")
     List<Object[]> myReservations(@Param("userId") Long userId);
+
+    /*@Query("SELECT r.id, r.concertId, r.purchaseId, r.purchaseCount, c.startDate, c.title, c.imgUrl, c.price"+
+            " FROM Reservation r INNER JOIN Concert c ON r.concertId = c.id WHERE r.purchaseId = :userId")
+    List<Object[]> myExpenditure(@Param("userId") Long userId);*/
 }
