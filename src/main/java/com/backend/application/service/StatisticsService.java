@@ -12,4 +12,8 @@ public interface StatisticsService {
     List<ConcertSimpleResponse> getMyConcertList(Long userId);
 
     List<ReservationResponse> getMyReservationList(Long userId);
+
+    List<ReservationResponse> getMyTotalRevenue(Long userId);
+
+    List<ReservationResponse> getConcertRevenue(Long concertId);
 }
