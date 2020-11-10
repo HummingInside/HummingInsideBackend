@@ -37,11 +37,15 @@ public class StatisticsApi {
 
         List<Object> result = new ArrayList<>();
 
-        List<ConcertSimpleResponse> responses = statisticsService.getMyConcertList(member.getId());
-        List<ReservationResponse> responses1 = statisticsService.getMyReservationList(member.getId());
+        List<ConcertSimpleResponse> myConcertResponses = statisticsService.getMyConcertList(member.getId());
+        List<ReservationResponse> reservationResponses = statisticsService.getMyReservationList(member.getId());
+        List<ReservationResponse> totalRevenueResponses = statisticsService.getMyTotalRevenue(member.getId());
+        List<ReservationResponse> concertRevenueResponses = statisticsService.getConcertRevenue(myConcertResponses.get(0).getId());
 
-        result.add(responses);
-        result.add(responses1);
+        result.add(myConcertResponses);
+        result.add(reservationResponses);
+        result.add(totalRevenueResponses);
+        result.add(concertRevenueResponses);
 
         return ResponseEntity.ok(result);
     }
