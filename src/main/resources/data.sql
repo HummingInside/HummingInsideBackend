@@ -36,3 +36,9 @@ insert into reservation (id, created_date, modified_date, concert_id, performer_
 insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (3, '2021-01-15 13:20:00', now(), 4, 104, 1, 101)
 insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (4, '2021-01-15 13:20:00', now(), 5, 105, 3, 101)
 insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (5, '2021-01-15 13:20:00', now(), 6, 106, 1, 101)
+
+insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (6, '2020-10-09 18:00:00', now(), 1, 101, 1, 102)
+insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (7, '2020-10-06 09:30:00', now(), 3, 103, 2, 102)
+insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (8, '2021-01-15 13:20:00', now(), 4, 104, 1, 102)
+insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (9, '2021-01-15 13:20:00', now(), 1, 101, 3, 102)
+insert into reservation (id, created_date, modified_date, concert_id, performer_id, purchase_count, purchase_id) values (10, '2021-01-15 13:20:00', now(), 6, 106, 1, 102)
