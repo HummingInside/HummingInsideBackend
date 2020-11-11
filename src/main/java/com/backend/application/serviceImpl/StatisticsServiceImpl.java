@@ -33,11 +33,27 @@ public class StatisticsServiceImpl implements StatisticsService {
     @Override
     public List<ReservationResponse> getMyReservationList(Long userId) {
         List<Object[]> objects = reservationRepository.myReservations(userId);
+        return getReservationResponses(objects);
+    }
+
+    @Override
+    public List<ReservationResponse> getMyTotalRevenue(Long userId) {
+        List<Object[]> objects = reservationRepository.myTotalRevenue(userId);
+        return getReservationResponses(objects);
+    }
+
+    @Override
+    public List<ReservationResponse> getConcertRevenue(Long concertId) {
+        List<Object[]> objects = reservationRepository.myConcertRevenue(concertId);
+        return getReservationResponses(objects);
+    }
+
+    private List<ReservationResponse> getReservationResponses(List<Object[]> objects) {
         List<ReservationResponse> result = new ArrayList<>();
 
         for(int i=0;i<objects.size();i++){
-            ReservationResponse temp = new ReservationResponse(objects.get(i));
-            result.add(temp);
+            ReservationResponse response = new ReservationResponse(objects.get(i));
+            result.add(response);
         }
 
         return result;

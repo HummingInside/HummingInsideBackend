@@ -29,6 +29,8 @@ public class ReservationResponse {
 
     private int price;
 
+    private String createdDate;
+
     /*public ReservationResponse(Long id, Long concertId, Long purchaseId, int purchaseCount,
                                LocalDateTime startDate, String title, String imgUrl, int price){
         this.id = id;
@@ -46,10 +48,12 @@ public class ReservationResponse {
         this.concertId = (Long) objects[1];
         this.purchaseId = (Long) objects[2];
         this.purchaseCount = (int) objects[3];
-        LocalDateTime temp = (LocalDateTime) objects[4];
-        this.startDate = temp.format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
+        LocalDateTime date = (LocalDateTime) objects[4];
+        this.startDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd / HH:mm"));
         this.title = (String) objects[5];
         this.imgUrl = (String) objects[6];
         this.price = (int) objects[7];
+        date = (LocalDateTime) objects[8];
+        this.createdDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
     }
 }
