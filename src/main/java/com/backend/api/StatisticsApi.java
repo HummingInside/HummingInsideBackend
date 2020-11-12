@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +42,21 @@ public class StatisticsApi {
         result.add(myConcertResponses);
         result.add(reservationResponses);
         result.add(totalRevenueResponses);
+        result.add(concertRevenueResponses);
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/statistics")
+    public ResponseEntity<?> getStatistics(@RequestBody Map<String, String> concert){
+        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+
+        Member member = (Member) authentication.getPrincipal();
+
+        List<Object> result = new ArrayList<>();
+
+        List<ReservationResponse> concertRevenueResponses = statisticsService.getConcertRevenue(Long.valueOf(concert.get("concertId")));
+
         result.add(concertRevenueResponses);
 
         return ResponseEntity.ok(result);
