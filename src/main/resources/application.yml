@@ -1,16 +1,44 @@
+spring:
+  profiles:
+    active:dev
+
+---
 server:
   address: localhost
   port: 8080
+  servlet:
+    context-path: /api
 
 spring:
+  profiles: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 1q2w3e4r
-    url: jdbc:mysql://localhost:3306/humminginside?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    password: 1234
+    url: jdbc:mysql://127.0.0.1:3306/humminginside?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
+    initialization-mode: always
   jpa:
+    hibernate:
+      ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 20MB
+    generate-ddl: true
+
+---
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  profiles: dev
+  jpa:
     show-sql: true
   servlet:
     multipart:
