@@ -15,5 +15,7 @@ public interface ConcertService {
 
     ConcertDetailResponse update(Long id, ConcertUpdateRequest request, Member member);
 
+    Long reserve(Long id, Long memberId);
+
     void delete(Long id);
 }
