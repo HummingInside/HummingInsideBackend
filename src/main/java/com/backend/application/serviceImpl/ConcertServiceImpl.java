@@ -7,11 +7,15 @@ import com.backend.core.concert.Concert;
 import com.backend.core.concert.ConcertRepository;
 import com.backend.core.concert.ConcertStatus;
 import com.backend.core.member.Member;
+import com.backend.core.reservation.Reservation;
+import com.backend.core.reservation.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,6 +26,7 @@ public class ConcertServiceImpl implements ConcertService {
 
     private final ConcertRepository concertRepository;
     private final CategoryRepository categoryRepository;
+    private final ReservationRepository reservationRepository;
 
     @Override
     public ConcertDetailResponse create(ConcertCreateRequest request, Member member) {
@@ -70,5 +75,24 @@ public class ConcertServiceImpl implements ConcertService {
 
     public void delete(Long id) {
         concertRepository.deleteById(id);
+    }
+
+    public Long reserve(Long id, Long purchaserId) {
+        Optional<Reservation> reservation =
+                reservationRepository.findFirstByConcertIdAndPurchaseId(id, purchaserId);
+        if(reservation.isPresent()){
+            Reservation res = reservation.get();
+            res.countUp();
+            return res.getId();
+        }
+        Member performer = concertRepository.getOne(id).getPerformer();
+        Reservation newReservation= Reservation.builder()
+                .concertId(id)
+                .performerId(performer.getId())
+                .purchaseId(purchaserId)
+                .purchaseCount(1)
+                .build();
+        reservationRepository.save(newReservation);
+        return newReservation.getId();
     }
 }

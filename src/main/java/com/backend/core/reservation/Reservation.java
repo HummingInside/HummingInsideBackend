@@ -28,4 +28,7 @@ public class Reservation extends BaseTimeEntity {
     @Column(length = 100, nullable = false, updatable = false)
     private Long purchaseId;
 
+    public void countUp(){
+        purchaseCount++;
+    }
 }
