@@ -18,4 +18,6 @@ public interface ConcertService {
     Long reserve(Long id, Long memberId);
 
     void delete(Long id);
+
+    ConcertDetailResponse updateStatus(Long id, Member member, String status);
 }

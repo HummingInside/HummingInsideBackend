@@ -80,4 +80,8 @@ public class Concert extends BaseTimeEntity {
     public void reserve(){
         this.currentAudience++;
     }
+
+    public void updateStatus(ConcertStatus status){
+        this.status = status;
+    }
 }

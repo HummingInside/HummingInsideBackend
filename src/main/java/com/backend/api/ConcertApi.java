@@ -71,7 +71,7 @@ public class ConcertApi {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id) throws IOException {
+    public ResponseEntity<?> delete(@PathVariable Long id) throws IOException {
         Member member = (Member) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
         fileService.delete(id, "delete");

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,6 +74,17 @@ public class ConcertServiceImpl implements ConcertService {
             concert.updateCategory(categoryRepository.getOne(request.getCategoryId()));
             return new ConcertDetailResponse(concert, false, true);
         }).orElse(null);
+    }
+
+    public ConcertDetailResponse updateStatus(Long id, Member member, String status){
+        if(!hasOwnership(id, member)){
+            return null;
+        }
+        Concert concert = concertRepository.getOne(id);
+        ConcertStatus updateStatus = Arrays.stream(ConcertStatus.values())
+                .filter(s -> s.getDesc().equals(status)).collect(toList()).get(0);
+        concert.updateStatus(updateStatus);
+        return new ConcertDetailResponse(concert, false, true);
     }
 
     public void delete(Long id) {
