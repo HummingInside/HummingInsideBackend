@@ -27,7 +27,6 @@ spring:
     multipart:
       enabled: true
       max-request-size: 20MB
-    generate-ddl: true
 
 ---
 
