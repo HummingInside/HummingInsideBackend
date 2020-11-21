@@ -21,8 +21,10 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
     private String description;
     private LocalDateTime endDate;
     private String runningTime;
+    private boolean hasPurchased;
+    private boolean hasOwnership;
 
-    public ConcertDetailResponse(Concert concert){
+    public ConcertDetailResponse(Concert concert, boolean hasPurchased, boolean hasOwnership){
         super(concert);
         category = new CategorySimple(concert.getCategory());
         price = concert.getPrice();
@@ -33,5 +35,7 @@ public class ConcertDetailResponse extends ConcertSimpleResponse {
         String hours = duration.toHours() > 0 ? duration.toHours()+" hours" : "";
         String minutes = duration.toMinutes() > 0 ? duration.toMinutes()%60+" minutes" : "";
         runningTime = hours + (hours.length() > 0 && minutes.length() > 0 ? " and " : "") + minutes;
+        this.hasPurchased = hasPurchased;
+        this.hasOwnership = hasOwnership;
     }
 }

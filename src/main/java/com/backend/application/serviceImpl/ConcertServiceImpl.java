@@ -10,10 +10,10 @@ import com.backend.core.member.Member;
 import com.backend.core.reservation.Reservation;
 import com.backend.core.reservation.ReservationRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,16 +33,19 @@ public class ConcertServiceImpl implements ConcertService {
         // TODO : validate request
         return categoryRepository.findById(request.getCategoryId()).map(category -> {
             Concert concert = concertRepository.save(request.toEntity(member, category));
-            return new ConcertDetailResponse(concert);
+            return new ConcertDetailResponse(concert, false, true);
         }).orElse(null);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ConcertDetailResponse findById(Long id) {
+    public ConcertDetailResponse findById(Long id, Member member) {
         // TODO : validate request
-        return concertRepository.findById(id)
-                .map(ConcertDetailResponse::new).orElse(null);
+        return concertRepository.findById(id).map(value ->
+                new ConcertDetailResponse(value,
+                        hasPurchased(id, member),
+                        hasOwnership(id, member)))
+                .orElse(null);
     }
 
     @Override
@@ -69,8 +72,19 @@ public class ConcertServiceImpl implements ConcertService {
                     request.getDescription(), request.getMaxAudience(), request.getCurrentAudience(),
                     request.getPrice(), request.getImgUrl());
             concert.updateCategory(categoryRepository.getOne(request.getCategoryId()));
-            return new ConcertDetailResponse(concert);
+            return new ConcertDetailResponse(concert, false, true);
         }).orElse(null);
+    }
+
+    public ConcertDetailResponse updateStatus(Long id, Member member, String status){
+        if(!hasOwnership(id, member)){
+            return null;
+        }
+        Concert concert = concertRepository.getOne(id);
+        ConcertStatus updateStatus = Arrays.stream(ConcertStatus.values())
+                .filter(s -> s.getDesc().equals(status)).collect(toList()).get(0);
+        concert.updateStatus(updateStatus);
+        return new ConcertDetailResponse(concert, false, true);
     }
 
     public void delete(Long id) {
@@ -78,6 +92,8 @@ public class ConcertServiceImpl implements ConcertService {
     }
 
     public Long reserve(Long id, Long purchaserId) {
+        Concert concert = concertRepository.getOne(id);
+        concert.reserve();
         Optional<Reservation> reservation =
                 reservationRepository.findFirstByConcertIdAndPurchaseId(id, purchaserId);
         if(reservation.isPresent()){
@@ -94,5 +110,17 @@ public class ConcertServiceImpl implements ConcertService {
                 .build();
         reservationRepository.save(newReservation);
         return newReservation.getId();
+    }
+
+    private boolean hasPurchased(Long concertId, Member member){
+        return reservationRepository
+                .findFirstByConcertIdAndPurchaseId(concertId, member.getId())
+                .isPresent();
+    }
+
+    private boolean hasOwnership(Long concertId, Member member){
+        return concertRepository.findById(concertId)
+                .map(value -> value.getPerformer().equals(member))
+                .orElse(false);
     }
 }

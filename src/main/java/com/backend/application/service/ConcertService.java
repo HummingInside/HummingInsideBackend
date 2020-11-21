@@ -9,7 +9,7 @@ public interface ConcertService {
 
     ConcertDetailResponse create(ConcertCreateRequest request, Member member);
 
-    ConcertDetailResponse findById(Long id);
+    ConcertDetailResponse findById(Long id, Member member);
 
     List<ConcertSimpleResponse> findAll(ConcertListRequest request);
 
@@ -18,4 +18,6 @@ public interface ConcertService {
     Long reserve(Long id, Long memberId);
 
     void delete(Long id);
+
+    ConcertDetailResponse updateStatus(Long id, Member member, String status);
 }

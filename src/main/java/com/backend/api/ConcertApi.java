@@ -42,7 +42,9 @@ public class ConcertApi {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id){
-        ConcertDetailResponse response = concertService.findById(id);
+        Member member = (Member) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        ConcertDetailResponse response = concertService.findById(id, member);
         if(response == null){
             throw new ResourceNotFoundException();
         }
@@ -69,7 +71,7 @@ public class ConcertApi {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id) throws IOException {
+    public ResponseEntity<?> delete(@PathVariable Long id) throws IOException {
         Member member = (Member) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
         fileService.delete(id, "delete");
