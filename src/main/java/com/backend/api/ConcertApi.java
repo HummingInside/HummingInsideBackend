@@ -42,7 +42,9 @@ public class ConcertApi {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id){
-        ConcertDetailResponse response = concertService.findById(id);
+        Member member = (Member) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        ConcertDetailResponse response = concertService.findById(id, member);
         if(response == null){
             throw new ResourceNotFoundException();
         }

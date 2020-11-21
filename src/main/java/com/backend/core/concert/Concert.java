@@ -76,4 +76,8 @@ public class Concert extends BaseTimeEntity {
     public void updateCategory(Category category){
         this.category = category;
     }
+
+    public void reserve(){
+        this.currentAudience++;
+    }
 }
