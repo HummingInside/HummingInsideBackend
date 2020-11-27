@@ -4,9 +4,10 @@ import com.backend.WithUser;
 import com.backend.application.dto.concert.ConcertCreateRequest;
 import com.backend.application.dto.concert.ConcertDetailResponse;
 import com.backend.application.dto.concert.ConcertSimpleResponse;
-import com.backend.core.concert.Category;
-import com.backend.core.concert.CategoryRepository;
-import com.backend.core.concert.ConcertStatus;
+import com.backend.application.dto.concert.ConcertUpdateRequest;
+import com.backend.core.concert.*;
+import com.backend.core.member.Member;
+import com.backend.core.member.MemberRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -24,8 +25,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -34,7 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ConcertApiTest {
 
     @Autowired MockMvc mockMvc;
+    @Autowired ConcertRepository concertRepository;
     @Autowired CategoryRepository categoryRepository;
+    @Autowired MemberRepository memberRepository;
 
     final String memberName = "user1";
     final String memberEmail = "sample@gmail.com";
@@ -87,11 +89,75 @@ class ConcertApiTest {
         assertThat(response.getStatus()).isEqualTo(ConcertStatus.UPCOMING.getDesc());
     }
 
+    @Test
+    @WithUser(name = memberName, email = memberEmail)
+    @DisplayName("Delete a concert")
+    void deleteConcert() throws Exception {
+        Concert concert = getConcert();
+
+        String url = "/concerts/" + concert.getId();
+        MvcResult result = mockMvc.perform(delete(url))
+                .andExpect(status().isOk()).andReturn();
+        mockMvc.perform(get(url))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithUser(name = memberName, email = memberEmail)
+    @DisplayName("Update a concert")
+    void updateConcert() throws Exception {
+        Concert concert = getConcert();
+
+        String title = concert.getTitle();
+        Category category = getCategory();
+        ConcertUpdateRequest request = new ConcertUpdateRequest();
+        request.setTitle("Sample Concert");
+        request.setCategoryId(category.getId());
+        request.setDescription("sample description");
+        request.setPrice(30000);
+        request.setMaxAudience(1000);
+        request.setStartDate(LocalDateTime.now());
+        request.setEndDate(LocalDateTime.now().plusDays(1));
+
+        String url = "/concerts/" + concert.getId();
+
+        MvcResult updateResult = mockMvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString(request)))
+                .andExpect(status().isOk()).andReturn();
+        ConcertDetailResponse response = getMapper().readValue(
+                updateResult.getResponse().getContentAsString(),
+                ConcertDetailResponse.class);
+
+        assertThat(response.getTitle())
+                .isEqualTo(request.getTitle())
+                .isNotEqualTo(title);
+    }
+
+    private Member getMember(){
+        return memberRepository.findByEmail(memberEmail).get();
+    }
+
+    private Concert getConcert(){
+        return concertRepository.save(Concert.builder()
+                .title("BTS 2020 Last Concert")
+                .performer(getMember())
+                .category(getCategory())
+                .description("This is the last concert of BTS in 2020!")
+                .maxAudience(10000)
+                .price(55000)
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now())
+                .imgUrl("testUrl")
+                .build());
+    }
+
     private ObjectMapper getMapper(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         return mapper;
     }
+
     private Category getCategory(){
         return categoryRepository.save(Category.builder()
                 .name("sample category")
