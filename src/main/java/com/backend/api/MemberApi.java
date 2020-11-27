@@ -27,12 +27,6 @@ public class MemberApi {
 
     private final MemberService memberService;
 
-    @GetMapping("/signup")
-    public String dispSignup() {
-
-        return "/signup";
-    }
-
     @PostMapping("/signup")
     public Long execSignup(@RequestBody Map<String, String> member) {
         return memberRepository.save(Member.builder()
