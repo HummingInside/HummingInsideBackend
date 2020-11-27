@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +23,6 @@ class ConcertTest {
     @Autowired CategoryRepository categoryRepository;
 
     @Test
-    @DisplayName("create and read a concert")
     void createAndReadConcert(){
         Member performer = createMember();
         Category category = createCategory();
@@ -30,28 +30,74 @@ class ConcertTest {
                 .title("BTS 2020 Last Concert")
                 .performer(performer)
                 .category(category)
-//                .date(LocalDateTime.of(2020, 12, 29, 22, 0, 0))
+                .description("This is the last concert of BTS in 2020!")
+                .maxAudience(10000)
+                .price(55000)
+                .startDate(LocalDateTime.now())
+                .endDate(LocalDateTime.now())
+                .imgUrl("testUrl")
+                .build();
+        Long id = concertRepository.save(concert).getId();
+
+        String stringResult = Concert.builder().toString();
+        int hashResult = concert.hashCode();
+
+        concertRepository.findById(id).ifPresent(findConcert -> {
+            boolean equalsTrue = findConcert.equals(concert);
+            boolean equalsFalse = findConcert.equals(new Concert());
+            assertThat(findConcert.getTitle()).isEqualTo(concert.getTitle());
+            assertThat(findConcert.getPerformer()).isEqualTo(concert.getPerformer());
+            assertThat(findConcert.getCategory()).isEqualTo(concert.getCategory());
+            assertThat(findConcert.getCurrentAudience()).isEqualTo(concert.getCurrentAudience());
+            assertThat(findConcert.getStatus()).isEqualTo(concert.getStatus());
+
+            assertThat(findConcert.getStartDate()).isEqualTo(concert.getStartDate());
+            assertThat(findConcert.getEndDate()).isEqualTo(concert.getEndDate());
+
+            assertThat(findConcert.getDescription()).isEqualTo(concert.getDescription());
+            assertThat(findConcert.getMaxAudience()).isEqualTo(concert.getMaxAudience());
+            assertThat(findConcert.getPrice()).isEqualTo(concert.getPrice());
+            assertThat(findConcert.getLikesCount()).isEqualTo(concert.getLikesCount());
+            assertThat(findConcert.getImgUrl()).isEqualTo(concert.getImgUrl());
+
+            System.out.println(findConcert.getCreatedDate());
+            System.out.println(findConcert.getStatus());
+        });
+    }
+
+    @Test
+    void updateConcert(){
+        Member performer = createMember();
+        Category category = createCategory();
+        Concert concert = Concert.builder()
+                .title("BTS 2020 Last Concert")
+                .performer(performer)
+                .category(category)
                 .description("This is the last concert of BTS in 2020!")
                 .maxAudience(10000)
                 .price(55000)
                 .build();
-        Long id = concertRepository.save(concert).getId();
 
-        concertRepository.findById(id).ifPresent(findConcert -> {
-            assertThat(findConcert.getTitle()).isEqualTo(concert.getTitle());
-            assertThat(findConcert.getPerformer()).isEqualTo(performer);
-            assertThat(findConcert.getCategory()).isEqualTo(category);
-            System.out.println(findConcert.getCreatedDate());
-            System.out.println(findConcert.getStatus());
-        });
+        LocalDateTime time = LocalDateTime.now();
 
+        concert.updateCategory(category);
+        concert.updateInfo("testTitle", LocalDateTime.now(), LocalDateTime.now(), "testDescription",
+        10, 3, 3000, "testImgUrl");
+        concert.updateStatus(ConcertStatus.ENDED);
     }
 
     private Member createMember(){
-        return memberRepository.save(Member.builder().name("Junyoung").build());
+        return memberRepository.save(Member.builder()
+                .email("testEmail")
+                .password("tesPass")
+                .name("Junyoung")
+                .roles(Collections.singletonList("ROLE_USER"))
+                .build());
     }
 
     private Category createCategory(){
-        return categoryRepository.save(Category.builder().name("K-pop").build());
+        return categoryRepository.save(Category.builder()
+                .name("K-pop")
+                .build());
     }
 }

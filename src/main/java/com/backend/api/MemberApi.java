@@ -29,6 +29,7 @@ public class MemberApi {
 
     @GetMapping("/signup")
     public String dispSignup() {
+
         return "/signup";
     }
 
@@ -61,7 +62,6 @@ public class MemberApi {
         result.put("token", jwtTokenProvider.createToken(member.getEmail(), member.getRoles()));
 
         return result;
-        //return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
 
     @GetMapping("/user")
