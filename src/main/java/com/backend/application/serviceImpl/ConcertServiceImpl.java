@@ -87,6 +87,11 @@ public class ConcertServiceImpl implements ConcertService {
         return new ConcertDetailResponse(concert, false, true);
     }
 
+    public void updateStatus(Long id, ConcertStatus status){
+        Concert concert = concertRepository.findById(id).get();
+        concert.updateStatus(status);
+    }
+
     public void delete(Long id) {
         concertRepository.deleteById(id);
     }
