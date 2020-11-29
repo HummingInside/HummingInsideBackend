@@ -13,7 +13,7 @@ spring:
   profiles: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 1q2w3e4r
+    password: 1234
     url: jdbc:mysql://127.0.0.1:3306/humminginside?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     initialization-mode: always
@@ -23,6 +23,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
+    generate-ddl: true
   servlet:
     multipart:
       enabled: true
@@ -38,7 +39,10 @@ server:
 spring:
   profiles: dev
   jpa:
+    hibernate:
+      ddl-auto: create
     show-sql: true
+    generate-ddl: true
   servlet:
     multipart:
       enabled: true
