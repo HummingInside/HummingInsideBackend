@@ -38,12 +38,27 @@ server:
 
 spring:
   profiles: dev
+
+  datesource:
+    url: jdbc:h2:tcp://localhost/~/humminginside
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
-    generate-ddl: true
+    properties:
+      hibernate:
+        #show-sql: true
+        format_sql: true
+        generate-ddl: true
+        use_sql_comment: true
+
   servlet:
     multipart:
       enabled: true
       max-request-size: 20MB
+
+logging.level:
+ org.hibernate.SQL: debug
