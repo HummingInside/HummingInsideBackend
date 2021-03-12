@@ -1,4 +1,4 @@
-package com.humming.core.concert;
+package com.humming.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Entity
-public class Category {
+public class Category extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,3 +27,4 @@ public class Category {
         this.name = name;
     }
 }
+

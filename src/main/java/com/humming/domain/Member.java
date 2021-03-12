@@ -1,6 +1,5 @@
-package com.humming.core.member;
+package com.humming.domain;
 
-import com.humming.core.BaseTimeEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

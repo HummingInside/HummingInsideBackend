@@ -1,6 +1,5 @@
-package com.humming.core.reservation;
+package com.humming.domain;
 
-import com.humming.core.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,3 +31,4 @@ public class Reservation extends BaseTimeEntity {
         purchaseCount++;
     }
 }
+

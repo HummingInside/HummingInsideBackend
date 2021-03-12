@@ -1,4 +1,4 @@
-package com.humming.core.concert;
+package com.humming.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

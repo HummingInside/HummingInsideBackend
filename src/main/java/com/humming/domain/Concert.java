@@ -1,7 +1,5 @@
-package com.humming.core.concert;
+package com.humming.domain;
 
-import com.humming.core.BaseTimeEntity;
-import com.humming.core.member.Member;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 

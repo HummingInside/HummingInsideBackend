@@ -1,4 +1,4 @@
-package com.humming.core;
+package com.humming.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
