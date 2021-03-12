@@ -1,6 +1,6 @@
-package com.humming.application.dto.member;
+package com.humming.api.dto.member;
 
-import com.humming.core.member.Member;
+import com.humming.domain.Member;
 import lombok.*;
 
 @Getter

@@ -1,4 +1,4 @@
-package com.humming.application.dto.member;
+package com.humming.api.dto.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

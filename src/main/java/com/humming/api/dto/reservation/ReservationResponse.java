@@ -1,4 +1,4 @@
-package com.humming.application.dto.reservation;
+package com.humming.api.dto.reservation;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

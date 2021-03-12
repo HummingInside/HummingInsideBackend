@@ -1,4 +1,4 @@
-package com.humming.application.dto.concert;
+package com.humming.api.dto.concert;
 
 
 import lombok.Getter;

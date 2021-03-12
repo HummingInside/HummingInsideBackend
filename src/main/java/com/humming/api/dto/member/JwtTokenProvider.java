@@ -1,4 +1,4 @@
-package com.humming.application.dto.member;
+package com.humming.api.dto.member;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

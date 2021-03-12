@@ -1,8 +1,8 @@
-package com.humming.application.dto.concert;
+package com.humming.api.dto.concert;
 
-import com.humming.core.concert.Category;
-import com.humming.core.concert.Concert;
-import com.humming.core.member.Member;
+import com.humming.domain.Category;
+import com.humming.domain.Concert;
+import com.humming.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
