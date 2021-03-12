@@ -1,5 +1,6 @@
-package com.humming.core.member;
+package com.humming.repository;
 
+import com.humming.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

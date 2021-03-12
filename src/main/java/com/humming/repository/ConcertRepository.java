@@ -1,6 +1,8 @@
-package com.humming.core.concert;
+package com.humming.repository;
 
-import com.humming.application.dto.concert.ConcertSimpleResponse;
+import com.humming.api.dto.concert.ConcertSimpleResponse;
+import com.humming.domain.Concert;
+import com.humming.domain.ConcertStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
