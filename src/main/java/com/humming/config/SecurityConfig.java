@@ -1,8 +1,7 @@
-package com.humming.api.security;
+package com.humming.config;
 
-import com.humming.application.dto.member.JwtAuthenticationFilter;
-import com.humming.application.dto.member.JwtTokenProvider;
-import com.humming.application.service.MemberService;
+import com.humming.api.dto.member.JwtAuthenticationFilter;
+import com.humming.api.dto.member.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +22,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private MemberService memberService;
-
     private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
