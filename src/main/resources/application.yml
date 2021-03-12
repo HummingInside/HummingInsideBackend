@@ -1,8 +1,69 @@
-spring:
-  profiles:
-    active:dev
+#spring:
+#  profiles:
+#    active:dev
+#
+#---
+#server:
+#  address: localhost
+#  port: 8080
+#  servlet:
+#    context-path: /api
+#
+#spring:
+#  profiles: local
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    password: 1234
+#    url: jdbc:mysql://127.0.0.1:3306/humminginside?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    initialization-mode: always
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    show-sql: true
+#    generate-ddl: true
+#  servlet:
+#    multipart:
+#      enabled: true
+#      max-request-size: 20MB
+#
+#---
+#
+#server:
+#  address: localhost
+#  port: 8080
+#  servlet:
+#    context-path: /api
+#
+#spring:
+#  profiles: dev
+#
+#  datesource:
+#    url: jdbc:h2:tcp://localhost/~/humminginside
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        #show-sql: true
+#        format_sql: true
+#        #generate-ddl: true
+#        use_sql_comment: true
+#
+#  servlet:
+#    multipart:
+#      enabled: true
+#      max-request-size: 20MB
+#
+#logging.level:
+# org.hibernate.SQL: debug
 
----
 server:
   address: localhost
   port: 8080
@@ -10,36 +71,7 @@ server:
     context-path: /api
 
 spring:
-  profiles: local
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 1234
-    url: jdbc:mysql://127.0.0.1:3306/humminginside?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    initialization-mode: always
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-    generate-ddl: true
-  servlet:
-    multipart:
-      enabled: true
-      max-request-size: 20MB
-
----
-
-server:
-  port: 8080
-  servlet:
-    context-path: /api
-
-spring:
-  profiles: dev
-
-  datesource:
     url: jdbc:h2:tcp://localhost/~/humminginside
     username: sa
     password:
@@ -52,13 +84,8 @@ spring:
       hibernate:
         #show-sql: true
         format_sql: true
-        generate-ddl: true
-        use_sql_comment: true
-
-  servlet:
-    multipart:
-      enabled: true
-      max-request-size: 20MB
+        #generate-ddl: true
+        use_sql_comments: true
 
 logging.level:
- org.hibernate.SQL: debug
+  org.hibernate.SQL: debug

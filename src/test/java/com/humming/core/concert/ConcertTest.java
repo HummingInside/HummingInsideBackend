@@ -1,7 +1,12 @@
 package com.humming.core.concert;
 
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.domain.Category;
+import com.humming.domain.Concert;
+import com.humming.domain.Member;
+import com.humming.repository.CategoryRepository;
+import com.humming.repository.ConcertRepository;
+import com.humming.repository.MemberRepository;
+import com.humming.domain.ConcertStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,9 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class ConcertTest {
 
-    @Autowired ConcertRepository concertRepository;
+    @Autowired
+    ConcertRepository concertRepository;
     @Autowired MemberRepository memberRepository;
-    @Autowired CategoryRepository categoryRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @Test
     void createAndReadConcert(){
@@ -41,8 +48,8 @@ class ConcertTest {
         int hashResult = concert.hashCode();
 
         concertRepository.findById(id).ifPresent(findConcert -> {
-            boolean equalsTrue = findConcert.equals(concert);
-            boolean equalsFalse = findConcert.equals(new Concert());
+//            boolean equalsTrue = findConcert.equals(concert);
+//            boolean equalsFalse = findConcert.equals(new Concert());
             assertThat(findConcert.getTitle()).isEqualTo(concert.getTitle());
             assertThat(findConcert.getPerformer()).isEqualTo(concert.getPerformer());
             assertThat(findConcert.getCategory()).isEqualTo(concert.getCategory());

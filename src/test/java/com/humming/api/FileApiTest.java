@@ -1,8 +1,8 @@
 package com.humming.api;
 
 import com.humming.WithUser;
-import com.humming.application.dto.concert.CategorySimple;
-import com.humming.core.concert.CategoryRepository;
+import com.humming.api.dto.concert.CategorySimple;
+import com.humming.repository.CategoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.DisplayName;

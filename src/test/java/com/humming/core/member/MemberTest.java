@@ -1,5 +1,7 @@
 package com.humming.core.member;
 
+import com.humming.domain.Member;
+import com.humming.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,10 +38,8 @@ public class MemberTest {
         memberRepository.save(member);
 
         memberRepository.findByEmail(member.getEmail()).ifPresent(findMember -> {
-            boolean equalsResult = findMember.equals(member);
-            System.out.println(equalsResult);
-            boolean equalsResultF = findMember.equals(new Member());
-            System.out.println(equalsResultF);
+//            boolean equalsResult = findMember.equals(member);
+//            boolean equalsResultF = findMember.equals(new Member());
             assertThat(findMember.getId()).isEqualTo(member.getId());
             assertThat(findMember.getName()).isEqualTo(member.getName());
             assertThat(findMember.getPassword()).isEqualTo(member.getPassword());

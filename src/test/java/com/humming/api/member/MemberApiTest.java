@@ -1,9 +1,9 @@
 package com.humming.api.member;
 
-import com.humming.api.MemberApi;
-import com.humming.application.dto.member.JwtTokenProvider;
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.api.controller.MemberApi;
+import com.humming.api.dto.member.JwtTokenProvider;
+import com.humming.domain.Member;
+import com.humming.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

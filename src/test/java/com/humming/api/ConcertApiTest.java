@@ -1,16 +1,20 @@
 package com.humming.api;
 
 import com.humming.WithUser;
-import com.humming.application.dto.concert.ConcertCreateRequest;
-import com.humming.application.dto.concert.ConcertDetailResponse;
-import com.humming.application.dto.concert.ConcertSimpleResponse;
-import com.humming.application.dto.concert.ConcertUpdateRequest;
-import com.humming.core.concert.*;
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.api.dto.concert.ConcertCreateRequest;
+import com.humming.api.dto.concert.ConcertDetailResponse;
+import com.humming.api.dto.concert.ConcertSimpleResponse;
+import com.humming.api.dto.concert.ConcertUpdateRequest;
+import com.humming.domain.Category;
+import com.humming.domain.Concert;
+import com.humming.domain.Member;
+import com.humming.repository.CategoryRepository;
+import com.humming.repository.ConcertRepository;
+import com.humming.repository.MemberRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.humming.domain.ConcertStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +38,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ConcertApiTest {
 
     @Autowired MockMvc mockMvc;
-    @Autowired ConcertRepository concertRepository;
-    @Autowired CategoryRepository categoryRepository;
+    @Autowired
+    ConcertRepository concertRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
     @Autowired MemberRepository memberRepository;
 
     final String memberName = "user1";

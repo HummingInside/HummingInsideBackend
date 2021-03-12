@@ -1,5 +1,7 @@
 package com.humming.core.reservation;
 
+import com.humming.domain.Reservation;
+import com.humming.repository.ReservationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,8 +31,8 @@ public class ReservationTest {
         reservationRepository.save(reservation);
 
         reservationRepository.findById(reservation.getId()).ifPresent(findReservation -> {
-            boolean equalsTrue = findReservation.equals(reservation);
-            boolean equalsFalse = findReservation.equals(new Reservation());
+//            boolean equalsTrue = findReservation.equals(reservation);
+//            boolean equalsFalse = findReservation.equals(new Reservation());
             assertThat(findReservation.getConcertId()).isEqualTo(reservation.getConcertId());
             assertThat(findReservation.getPerformerId()).isEqualTo(reservation.getPerformerId());
             assertThat(findReservation.getPurchaseId()).isEqualTo(reservation.getPurchaseId());

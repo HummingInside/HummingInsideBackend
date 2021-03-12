@@ -1,7 +1,7 @@
 package com.humming;
 
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.domain.Member;
+import com.humming.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

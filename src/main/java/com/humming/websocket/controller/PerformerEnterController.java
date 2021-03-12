@@ -1,7 +1,7 @@
 package com.humming.websocket.controller;
 
-import com.humming.application.serviceImpl.ConcertServiceImpl;
-import com.humming.core.concert.ConcertStatus;
+import com.humming.domain.ConcertStatus;
+import com.humming.service.ConcertService;
 import com.humming.websocket.message.SocketMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class PerformerEnterController {
 
-    private final ConcertServiceImpl concertService;
+    private final ConcertService concertService;
 
     @MessageMapping("/{concert_pk}/performer/enter")
     @SendTo("/listen/{concert_pk}/performer/enter")
