@@ -1,14 +1,13 @@
-package com.humming.application.serviceImpl;
+package com.humming.service;
 
-import com.humming.application.dto.concert.*;
-import com.humming.application.service.ConcertService;
-import com.humming.core.concert.CategoryRepository;
-import com.humming.core.concert.Concert;
-import com.humming.core.concert.ConcertRepository;
-import com.humming.core.concert.ConcertStatus;
-import com.humming.core.member.Member;
-import com.humming.core.reservation.Reservation;
-import com.humming.core.reservation.ReservationRepository;
+import com.humming.domain.Concert;
+import com.humming.domain.ConcertStatus;
+import com.humming.api.dto.concert.*;
+import com.humming.domain.Member;
+import com.humming.domain.Reservation;
+import com.humming.repository.CategoryRepository;
+import com.humming.repository.ConcertRepository;
+import com.humming.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +21,12 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class ConcertServiceImpl implements ConcertService {
+public class ConcertService {
 
     private final ConcertRepository concertRepository;
     private final CategoryRepository categoryRepository;
     private final ReservationRepository reservationRepository;
 
-    @Override
     public ConcertDetailResponse create(ConcertCreateRequest request, Member member) {
         // TODO : validate request
         return categoryRepository.findById(request.getCategoryId()).map(category -> {
@@ -37,7 +35,6 @@ public class ConcertServiceImpl implements ConcertService {
         }).orElse(null);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public ConcertDetailResponse findById(Long id, Member member) {
         // TODO : validate request
@@ -48,7 +45,6 @@ public class ConcertServiceImpl implements ConcertService {
                 .orElse(null);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public List<ConcertSimpleResponse> findAll(ConcertListRequest request) {
         // TODO : validate request
@@ -60,8 +56,6 @@ public class ConcertServiceImpl implements ConcertService {
                 request.getCategoryId(), request.getPerformerName())
                 .stream().map(ConcertSimpleResponse::new).collect(toList());
     }
-
-    @Override
     public ConcertDetailResponse update(Long id, ConcertUpdateRequest request, Member member) {
         // TODO : validate request
         return concertRepository.findById(id).map(concert -> {

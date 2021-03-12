@@ -1,9 +1,8 @@
-package com.humming.application.serviceImpl;
+package com.humming.service;
 
-import com.humming.application.service.FileService;
 import com.humming.config.StorageProperties;
-import com.humming.core.concert.Concert;
-import com.humming.core.concert.ConcertRepository;
+import com.humming.domain.Concert;
+import com.humming.repository.ConcertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,13 +20,13 @@ import java.nio.file.StandardCopyOption;
 
 @Transactional
 @Service
-public class FileServiceImpl implements FileService {
+public class FileService {
 
     private final Path directory;
     private final ConcertRepository concertRepository;
 
     @Autowired
-    public FileServiceImpl(StorageProperties properties, ConcertRepository concertRepository) {
+    public FileService(StorageProperties properties, ConcertRepository concertRepository) {
         this.directory = Paths.get(properties.getLocation());
         this.concertRepository = concertRepository;
     }
@@ -78,4 +77,5 @@ public class FileServiceImpl implements FileService {
         }
         return filePath.toString();
     }
+
 }

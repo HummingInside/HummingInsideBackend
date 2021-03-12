@@ -1,18 +1,18 @@
-package com.humming.application.serviceImpl;
+package com.humming.service;
 
-import com.humming.application.service.MemberService;
-import com.humming.core.member.MemberRepository;
+import com.humming.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return memberRepository.findByEmail(username)
