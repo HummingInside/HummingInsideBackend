@@ -1,12 +1,12 @@
-package com.humming.api;
+package com.humming.api.controller;
 
-import com.humming.api.exception.ResourceNotFoundException;
-import com.humming.application.dto.concert.*;
-import com.humming.application.service.FileService;
-import com.humming.application.serviceImpl.ConcertServiceImpl;
-import com.humming.core.concert.ConcertRepository;
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.domain.Member;
+import com.humming.api.dto.concert.*;
+import com.humming.exception.ResourceNotFoundException;
+import com.humming.repository.ConcertRepository;
+import com.humming.repository.MemberRepository;
+import com.humming.service.ConcertService;
+import com.humming.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 public class ConcertApi {
 
-    private final ConcertServiceImpl concertService;
+    private final ConcertService concertService;
     private final FileService fileService;
     private final MemberRepository memberRepository;
     private final ConcertRepository concertRepository;

@@ -1,7 +1,7 @@
-package com.humming.api;
+package com.humming.api.controller;
 
-import com.humming.application.dto.concert.CategorySimple;
-import com.humming.core.concert.CategoryRepository;
+import com.humming.api.dto.concert.CategorySimple;
+import com.humming.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

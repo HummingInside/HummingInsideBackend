@@ -1,9 +1,9 @@
-package com.humming.api;
+package com.humming.api.controller;
 
-import com.humming.application.dto.member.JwtTokenProvider;
-import com.humming.application.service.MemberService;
-import com.humming.core.member.Member;
-import com.humming.core.member.MemberRepository;
+import com.humming.api.dto.member.JwtTokenProvider;
+import com.humming.domain.Member;
+import com.humming.service.MemberService;
+import com.humming.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

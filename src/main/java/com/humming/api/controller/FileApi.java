@@ -1,7 +1,7 @@
-package com.humming.api;
+package com.humming.api.controller;
 
-import com.humming.api.exception.ResourceNotFoundException;
-import com.humming.application.service.FileService;
+import com.humming.exception.ResourceNotFoundException;
+import com.humming.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

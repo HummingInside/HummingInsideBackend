@@ -1,10 +1,10 @@
-package com.humming.api;
+package com.humming.api.controller;
 
-import com.humming.application.dto.concert.ConcertSimpleResponse;
-import com.humming.application.dto.reservation.ReservationResponse;
-import com.humming.application.service.ConcertService;
-import com.humming.application.service.StatisticsService;
-import com.humming.core.member.Member;
+import com.humming.api.dto.concert.ConcertSimpleResponse;
+import com.humming.api.dto.reservation.ReservationResponse;
+import com.humming.domain.Member;
+import com.humming.service.ConcertService;
+import com.humming.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
