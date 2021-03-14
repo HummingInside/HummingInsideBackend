@@ -1,15 +1,12 @@
 package com.humming.domain;
 
+import com.humming.domain.base.BaseTimeEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,8 +16,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Member extends BaseTimeEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long id;
 
     @Column(length = 20, nullable = false)
@@ -32,20 +28,17 @@ public class Member extends BaseTimeEntity implements UserDetails {
     @Column(length = 100, nullable = false, updatable = false)
     private String name;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return name;
+        return null;
     }
 
     @Override
